@@ -5,12 +5,12 @@ from taskapi.models import CustomUser
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     
-    username = serializers.CharField(required=True, )  # Allow blank usernames
+    username = serializers.CharField(required=True, )  
     email = serializers.EmailField(required=True)
 
     def validate(self, attrs):
         
-        username = attrs.get("username") # provide a default value
+        username = attrs.get("username") 
         email = attrs.get('email')
         password = attrs.get("password")
 

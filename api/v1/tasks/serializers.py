@@ -30,7 +30,7 @@ class TaskAssignSerializer(serializers.ModelSerializer):
         fields = ['assigned_to']
 
     def update(self, instance, validated_data):
-        print(f"DEBUG: Validated Data - {validated_data}")  # Debugging
+        print(f"DEBUG: Validated Data - {validated_data}")  
         instance.assigned_to = validated_data['assigned_to']
         instance.save()
         return instance

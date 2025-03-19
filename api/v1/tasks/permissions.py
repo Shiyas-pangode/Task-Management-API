@@ -36,7 +36,7 @@ class IsAdminManagerOrAssignedEmployee(permissions.BasePermission):
                 print("DEBUG: Employee - Access Granted ")
                 return True
 
-        print("DEBUG: Access Denied ❌")
+        print("DEBUG: Access Denied ")
         return False
 
 class IsAssignedEmployee(permissions.BasePermission):
@@ -53,9 +53,7 @@ class IsAssignedEmployee(permissions.BasePermission):
         return request.user.role.lower() == "employee" and obj.assigned_to == request.user
 
 class IsAdminUser(permissions.BasePermission):
-    """
-    Custom permission to allow only admin users to delete tasks.
-    """
+   
 
     def has_permission(self, request, view):
         
