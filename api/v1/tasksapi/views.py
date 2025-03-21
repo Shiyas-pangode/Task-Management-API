@@ -40,3 +40,8 @@ class TaskDeleteView(generics.DestroyAPIView):
     queryset = TaskModel.objects.all()
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response({"detail": "Task deleted successfully."}, status=status.HTTP_200_OK)
