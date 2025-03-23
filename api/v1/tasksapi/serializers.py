@@ -3,6 +3,7 @@ from rest_framework import serializers
 from taskapi.models import TaskModel
 from taskapi.models import CustomUser  
 
+
 class TaskCreateSerializer(serializers.ModelSerializer):
     created_by = serializers.PrimaryKeyRelatedField(
         queryset=CustomUser.objects.all(),  
@@ -31,7 +32,12 @@ class TaskAssignSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         print(f"DEBUG: Validated Data - {validated_data}")  
-        instance.assigned_to = validated_data['assigned_to']
+
+        assigned_to = Validated_data.get('assigned_to')
+
+        if not assigned_to :
+            raise serializers.ValidationError({'assigned_to ': 'This field is required'})
+
         instance.save()
         return instance
 
