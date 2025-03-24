@@ -1,5 +1,6 @@
 from rest_framework import permissions
 
+
 class IsAdminOrManager(permissions.BasePermission):
     def has_permission(self, request, view):
         print("DEBUG: Checking permissions in IsAdminOrManager")
@@ -7,18 +8,13 @@ class IsAdminOrManager(permissions.BasePermission):
         print("DEBUG: Authenticated:", request.user.is_authenticated)
         print("DEBUG: Role:", getattr(request.user, 'role', 'No Role Found'))
         
-        if request.method in permissions.SAFE_METHODS:
-            print("DEBUG: Read-only access granted")
-            return True  
-
-        
+    
         if request.user.is_authenticated and request.user.role.lower() in ['admin', 'manager']:
             print("DEBUG: Access granted to Admin/Manager")
             return True
 
         print("DEBUG: Access Denied (403)")
         return False
-
 
 
 class IsAdminManagerOrAssignedEmployee(permissions.BasePermission):

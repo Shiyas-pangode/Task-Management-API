@@ -2,6 +2,7 @@
 from rest_framework import serializers
 from taskapi.models import TaskModel
 from taskapi.models import CustomUser  
+from rest_framework.exceptions import ValidationError
 
 
 class TaskCreateSerializer(serializers.ModelSerializer):
@@ -35,9 +36,10 @@ class TaskAssignSerializer(serializers.ModelSerializer):
 
         assigned_to = validated_data.get('assigned_to')
 
-        if not assigned_to :
-            raise serializers.ValidationError({'assigned_to ': 'This field is required'})
+        if not assigned_to:
+            raise ValidationError({'assigned_to': 'This field is required'})
 
+        instance.assigned_to = assigned_to  # Fix: Assign the new value
         instance.save()
         return instance
 

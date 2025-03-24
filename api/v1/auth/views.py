@@ -5,10 +5,7 @@ from rest_framework import serializers
 
 
 
-
-
 class UserLoginView(TokenObtainPairView):
-
     serializer_class = CustomTokenObtainPairSerializer
     
   

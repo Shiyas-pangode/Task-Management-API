@@ -21,7 +21,7 @@ class EmployeeTaskUpdateView(generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_object(self):
-        """Fetch only the task assigned to the logged-in user."""
+        
         task = get_object_or_404(TaskModel, id=self.kwargs["pk"])
         
      

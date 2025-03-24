@@ -1,5 +1,6 @@
 from rest_framework import views
-from rest_framework.permissions import IsAuthenticated , AllowAny
+from rest_framework.permissions import IsAuthenticated , AllowAny 
+from rest_framework.exceptions import PermissionDenied
 from rest_framework import generics , status ,permissions
 from rest_framework.generics import CreateAPIView
 from taskapi.models import TaskModel
@@ -29,7 +30,20 @@ class TaskRetrieveUpdateView(generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated, IsAdminManagerOrAssignedEmployee]
 
 
-class TaskAssignView(generics.UpdateAPIView):
+class CustomAPIView(generics.GenericAPIView):
+    
+    def permission_denied(self, request, message=None, code=None):
+        
+        response_data = {
+            "error": "Access Denied",
+            "message": message or "Only Admin and Manager can access this action.",
+            "status_code": status.HTTP_403_FORBIDDEN
+        }
+        raise PermissionDenied(detail=response_data)
+
+
+
+class TaskAssignView(CustomAPIView,generics.UpdateAPIView):
     queryset = TaskModel.objects.all()
     serializer_class = TaskAssignSerializer
     permission_classes = [IsAuthenticated, IsAdminOrManager]
