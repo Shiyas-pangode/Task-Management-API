@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from Auth.models import CustomUser
+from users.models import CustomUser
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     
