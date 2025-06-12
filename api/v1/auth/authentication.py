@@ -1,5 +1,5 @@
 from django.contrib.auth.backends import ModelBackend
-from taskapi.models import CustomUser
+from Auth.models import CustomUser
 
 class EmailUsernameModel(ModelBackend):
     def authentication(self , request , username=None,email=None,password=None ,**kwarg):

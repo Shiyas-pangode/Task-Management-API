@@ -1,7 +1,6 @@
-
 from rest_framework import serializers
-from taskapi.models import TaskModel
-from taskapi.models import CustomUser  
+from assignment.models import TaskModel
+from Auth.models import CustomUser  
 from rest_framework.exceptions import ValidationError
 
 

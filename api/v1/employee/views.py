@@ -1,8 +1,11 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from taskapi.models import TaskModel
-from .serializers import EmployeeTaskSerializer, EmployeeTaskUpdateSerializer
 from rest_framework import permissions
+
+from Employee.models import EmployeeModel
+
+from .serializers import EmployeeTaskSerializer, EmployeeTaskUpdateSerializer
+
 from django.shortcuts import get_object_or_404
 
 
@@ -12,7 +15,7 @@ class EmployeeTaskListView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return TaskModel.objects.filter(assigned_to=self.request.user).distinct()
+        return EmployeeModel.objects.filter(assigned_to=self.request.user).distinct()
 
 
 
@@ -22,7 +25,7 @@ class EmployeeTaskUpdateView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         
-        task = get_object_or_404(TaskModel, id=self.kwargs["pk"])
+        task = get_object_or_404(EmployeeModel, id=self.kwargs["pk"])
         
      
         print(f" DEBUG: Logged-in User -> {self.request.user}")

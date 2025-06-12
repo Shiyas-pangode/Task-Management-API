@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from taskapi.models import CustomUser
+from Auth.models import CustomUser
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 
@@ -10,6 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'password': {'write_only': True},  
         }
+        
 
     def create(self, validated_data):
     

@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated , AllowAny
 from rest_framework.exceptions import PermissionDenied
 from rest_framework import generics , status ,permissions
 from rest_framework.generics import CreateAPIView
-from taskapi.models import TaskModel
+from assignment.models import TaskModel
 from . permissions import IsAdminOrManager , IsAdminManagerOrAssignedEmployee ,IsAssignedEmployee ,IsAdminUser
 from .serializers import TaskCreateSerializer , TaskAssignSerializer , TaskSerializer
 
@@ -59,3 +59,4 @@ class TaskDeleteView(generics.DestroyAPIView):
         instance = self.get_object()
         self.perform_destroy(instance)
         return Response({"detail": "Task deleted successfully."}, status=status.HTTP_200_OK)
+

@@ -1,18 +1,18 @@
 from rest_framework import serializers
-from taskapi.models import TaskModel  
+from Employee.models import EmployeeModel
 
 
 class EmployeeTaskSerializer(serializers.ModelSerializer):
    
     class Meta:
-        model = TaskModel
+        model = EmployeeModel
         fields = '__all__'  
 
 
 class EmployeeTaskUpdateSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = TaskModel
+        model = EmployeeModel
         fields = ['status', 'priority']  
 
         
