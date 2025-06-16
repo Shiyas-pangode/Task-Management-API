@@ -41,8 +41,16 @@ def employee_task_detail_update(request, pk):
         serializer = EmployeeTaskUpdateSerializer(task , data = request.data , partial=partial)
     if serializer.is_valid():
         serializer.save()
-        return Response(serializer.data)
-        return Response(serializer.errors , status=status.HTTP_400_BAD_REQUEST)
+        return Response({
+            'status_code':6000,
+            'message':'Succesfully updated',
+            'data':serializer.data
+        })
+    return Response({
+        'status_code':6001,
+        'message':'Update failed',
+        'errors':serializer.errors
+    }, status=status.HTTP_400_BAD_REQUEST)
 
 
 

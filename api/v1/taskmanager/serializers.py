@@ -30,17 +30,13 @@ class TaskAssignSerializer(serializers.ModelSerializer):
         model = TaskModel
         fields = ['assigned_to']
 
-    def update(self, instance, validated_data):
-        print(f"DEBUG: Validated Data - {validated_data}")  
-
-        assigned_to = validated_data.get('assigned_to')
-
-        if not assigned_to:
-            raise ValidationError({'assigned_to': 'This field is required'})
-
-        instance.assigned_to = assigned_to  # Fix: Assign the new value
-        instance.save()
-        return instance
+    # def update(self, instance, validated_data): 
+    #     assigned_to = validated_data.get('assigned_to')
+    #     if not assigned_to:
+    #         raise ValidationError({'assigned_to': 'This field is required'})
+    #     instance.assigned_to = assigned_to  # Fix: Assign the new value
+    #     instance.save()
+    #     return instance
 
   
 class TaskSerializer(serializers.ModelSerializer):
