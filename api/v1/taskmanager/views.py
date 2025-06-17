@@ -4,6 +4,8 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework import generics , status ,permissions
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
+from rest_framework.exceptions import ValidationError
+
 
 from assignments.models import TaskModel
 from . permissions import IsAdminOrManager , IsAdminManagerOrAssignedEmployee ,IsAssignedEmployee ,IsAdminUser
@@ -29,7 +31,7 @@ class TaskCreate(generics.CreateAPIView):
             'message':'Task  Successfully Created',
             'data':serializer.data
                 },status=status.HTTP_201_CREATED)
-        except ValidationError :
+        except ValidationError as e:
             return Response({
                 'status_code':6001,
                 'message':'Task retrieve unsuccessfull',
