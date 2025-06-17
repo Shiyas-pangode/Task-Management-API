@@ -12,12 +12,16 @@ class UserRegistrationView(generics.CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = [AllowAny]  
 
-    def create(self,request,*args,**kwargs):
+    def perform_create(self,serializer):
+        serializer.save()
+
+    def post(self,request,*args,**kwargs):
 
         serializer = self.get_serializer(data=request.data)
 
         try :
             serializer.is_valid(raise_exception=True)
+            self.perform_create(serializer)
             return Response({
                 'status_code':6000 ,
                 'message': 'Successfully registerd',
@@ -27,7 +31,7 @@ class UserRegistrationView(generics.CreateAPIView):
             return Response({
                 'status_code':6001,
                 'message':'Userregistation failed',
-                'errors': serializer.error
+                'errors': serializer.errors
             },status=status.HTTP_400_BAD_REQUEST)
         except Exception as e :
             return Response({

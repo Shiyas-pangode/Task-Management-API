@@ -49,7 +49,7 @@ REST_FRAMEWORK = {
 
 }
 AUTHENTICATION_BACKENDS = [
-    'api.v1.auth.authentication.EmailUsernameModel',
+    'api.v1.auth.authentication.EmailUsernameModelBackend',
     'django.contrib.auth.backends.ModelBackend', 
 ]
 
