@@ -14,7 +14,7 @@ class EmployeeTaskUpdateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = TaskModel
-        fields = ['status', 'priority'] 
-        read_only_fields = ['created_by','created_at', 'updated_at', 'deleted_at'] 
+        fields = ['title','description','status', 'priority','assigned_to','created_by'] 
+        read_only_fields = ['created_at', 'updated_at', 'deleted_at'] 
 
         

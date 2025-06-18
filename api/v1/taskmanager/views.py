@@ -35,7 +35,7 @@ class TaskCreate(generics.CreateAPIView):
             return Response({
                 'status_code':6001,
                 'message':'Task retrieve unsuccessfull',
-                'errors':str(e)
+                'errors':serializer.errors
             },status=status.HTTP_400_BAD_REQUEST)
         except Exception as e :
             return Response({
@@ -64,7 +64,7 @@ class TaskListView(generics.ListAPIView):
             return Response({
                 'status_code':6001,
                 'message':'Task retrieve unsuccessfull',
-                'errors':str(e)
+                'errors':serializer.errors
             },status=status.HTTP_401_UNAUTHORIZED)
 
 

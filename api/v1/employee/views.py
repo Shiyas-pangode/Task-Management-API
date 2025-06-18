@@ -46,11 +46,12 @@ def employee_task_detail_update(request, pk):
             'message':'Succesfully updated',
             'data':serializer.data
         })
-    return Response({
-        'status_code':6001,
-        'message':'Update failed',
-        'errors':serializer.errors
-    }, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response({
+            'status_code':6001,
+            'message':'Update failed',
+            'errors':serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
 
