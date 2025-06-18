@@ -20,6 +20,23 @@ class EmployeeTaskListView(generics.ListAPIView):
     def get_queryset(self):
         return TaskModel.objects.filter(assigned_to=self.request.user).distinct()
 
+    def list(self,request,*args,kwargs):
+        queryset = self.get_queryset()
+        serializer=self.get_serializer(queryset,many=True)
+        return Response({
+            'status_code':6000,
+            'message':'Succesfully feched',
+            'data':serializer.data
+        },status=200)
+        if not queryset.exists():
+            return Response({
+            'status_code':6001,
+            'message':'No task assigned',
+            'errors':serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
+            
+
+
 
 @api_view(['GET','PUT','PATCH'])
 @permission_classes([IsAuthenticated])
