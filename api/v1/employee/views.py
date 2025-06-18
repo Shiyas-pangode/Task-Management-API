@@ -20,7 +20,7 @@ class EmployeeTaskListView(generics.ListAPIView):
     def get_queryset(self):
         return TaskModel.objects.filter(assigned_to=self.request.user).distinct()
 
-    def list(self,request,*args,kwargs):
+    def list(self,request,*args,**kwargs):
         queryset = self.get_queryset()
         serializer=self.get_serializer(queryset,many=True)
         return Response({
