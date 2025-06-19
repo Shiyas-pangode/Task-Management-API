@@ -52,20 +52,24 @@ def employee_task_detail_update(request, pk):
 
     if request.method == 'GET':
         serializer = EmployeeTaskUpdateSerializer(task )
-        return Response(serializer.data)
+        return Response(
+            {   'status_code':6000,
+                'message':'Succesfully fetched',
+                'data':serializer.data
+            },status=200)
         
     elif request.method == 'PATCH' or request.method == 'PUT' :
         serializer = EmployeeTaskUpdateSerializer(task , data = request.data , partial=partial)
     if serializer.is_valid():
         serializer.save()
         return Response({
-            'status_code':6000,
+            'status_code':6001,
             'message':'Succesfully updated',
             'data':serializer.data
-        })
+        },status=201)
     else:
         return Response({
-            'status_code':6001,
+            'status_code':6002,
             'message':'Update failed',
             'errors':serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
