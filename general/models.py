@@ -7,17 +7,12 @@ class BaseModel(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     deleted_at = models.DateTimeField(null=True,blank=True)
-    is_deleted = models.BooleanField(blank=True,default=None)
+    is_deleted = models.BooleanField(blank=True,default=False)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta :
         abstract = True
 
-    
-    def is_deleted(self):
-
-        self.is__deleted=True
-        self.save()
 
     def soft_delete(self):
         self.is_deleted = True

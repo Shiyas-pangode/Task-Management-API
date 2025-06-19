@@ -149,15 +149,20 @@ class TaskAssignView(CustomAPIView,generics.UpdateAPIView):
 
 
 class TaskDeleteView(generics.DestroyAPIView):
-    queryset = TaskModel.objects.all()
+    queryset = TaskModel.objects.filter(is_deleted=False)
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
-        self.perform_destroy(instance)
+        instance.soft_delete()
         return Response({
             "status_code":6000,
-            "message": "Task deleted successfully."
+            "message": "Task deleted successfully.",
+            "data": {
+                "id":instance.id,
+                "title":instance.title,
+                "deleted_at":instance.deleted_at
+            }
         }, status=status.HTTP_200_OK)
 

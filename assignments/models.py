@@ -3,7 +3,7 @@ from users.models import CustomUser
 from general.models import BaseModel
 
 
-class TaskModel(models.Model):
+class TaskModel(BaseModel):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('in_progress', 'In Progress'),
